@@ -2,7 +2,7 @@
 authors = ["ThuRAY <thuray.email@gmail.com>"]
 channels = ["conda-forge"]
 name = "16-Rex-Omni"
-platforms = ["osx-arm64"]
+platforms = ["osx-arm64", "linux-64"]
 version = "0.1.0"
 
 [tasks]
