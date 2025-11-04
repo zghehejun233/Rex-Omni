@@ -159,6 +159,7 @@ vis.save("tutorials/detection_example/test_images/cafe_visualize.jpg")
 - **top_p**: Nucleus sampling parameter; model samples from the smallest set of tokens with cumulative probability ≥ top_p.
 - **top_k**: Top-k sampling; restricts sampling to the k most likely tokens.
 - **repetition_penalty**: Penalizes repeated tokens; >1.0 discourages repetition.
+- **use_flash_attention**: Enable FlashAttention in supported transformer backends for lower latency.
 - Optional advanced settings (supported via kwargs when constructing the wrapper):
   - Transformers: `torch_dtype`, `attn_implementation`, `device_map`, `trust_remote_code`, etc.
   - VLLM: `tokenizer_mode`, `limit_mm_per_prompt`, `max_model_len`, `gpu_memory_utilization`, `tensor_parallel_size`, `trust_remote_code`, etc.

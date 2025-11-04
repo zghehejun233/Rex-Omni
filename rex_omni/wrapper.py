@@ -37,6 +37,7 @@ class RexOmniWrapper:
         skip_special_tokens: bool = False,
         stop: Optional[List[str]] = None,
         quantization: str = None,
+        use_flash_attention: bool = False,
         **kwargs,
     ):
         """
@@ -56,6 +57,7 @@ class RexOmniWrapper:
             skip_special_tokens: Whether to skip special tokens in output
             stop: Stop sequences for generation
             quantization: Quantization type
+            use_flash_attention: Toggle FlashAttention when supported
             **kwargs: Additional arguments for model initialization
         """
         self.model_path = model_path
@@ -73,6 +75,8 @@ class RexOmniWrapper:
         self.skip_special_tokens = skip_special_tokens
         self.stop = stop or ["<|im_end|>"]
         self.quantization = quantization
+        self.use_flash_attention = use_flash_attention
+        self._attn_implementation_override = kwargs.pop("attn_implementation", None)
 
         # Initialize model and processor
         self._initialize_model(**kwargs)
@@ -141,12 +145,15 @@ class RexOmniWrapper:
             from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration
 
             # Initialize transformers model
+            attn_implementation = (
+                "flash_attention_2"
+                if self.use_flash_attention
+                else self._attn_implementation_override
+            )
             self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 self.model_path,
                 torch_dtype=kwargs.get("torch_dtype", torch.bfloat16),
-                attn_implementation=kwargs.get(
-                    "attn_implementation"
-                ),
+                attn_implementation=attn_implementation,
                 device_map=kwargs.get("device_map", "auto"),
                 trust_remote_code=kwargs.get("trust_remote_code", True),
                 **{
@@ -155,7 +162,6 @@ class RexOmniWrapper:
                     if k
                     not in [
                         "torch_dtype",
-                        "attn_implementation",
                         "device_map",
                         "trust_remote_code",
                     ]

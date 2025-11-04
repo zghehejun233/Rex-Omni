@@ -8,6 +8,7 @@ Basic object detection example using Rex Omni
 import torch
 from PIL import Image
 from rex_omni import RexOmniVisualize, RexOmniWrapper
+import time
 
 
 def main():
@@ -44,7 +45,10 @@ def main():
         "lamp",
     ]
 
+    start_time = time.time()
     results = rex_model.inference(images=image, task="detection", categories=categories)
+    elapsed_time = time.time() - start_time
+    print(f"Inference elapsed time: {elapsed_time:.2f} seconds")
 
     # Print results
     result = results[0]
