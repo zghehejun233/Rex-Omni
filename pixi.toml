@@ -1,0 +1,28 @@
+[workspace]
+authors = ["ThuRAY <thuray.email@gmail.com>"]
+channels = ["conda-forge"]
+name = "16-Rex-Omni"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.10"
+pip = ">=25.2,<26"
+
+[pypi-dependencies]
+torch = ">=2.9.0, <3"
+torchvision = ">=0.24.0, <0.25"
+numpy = ">=2.2.6, <3"
+pillow = ">=10.4.0, <11"
+matplotlib = ">=3.10.7, <4"
+qwen-vl-utils = ">=0.0.14, <0.0.15"
+transformers = ">=4.57.1, <5"
+gradio = ">=4.44.1, <5"
+gradio-image-prompter = ">=0.1.0, <0.2"
+pydantic = ">=2.12.3, <3"
+pycocotools = ">=2.0.10, <3"
+shapely = ">=2.1.2, <3"
+gradio-bbox-annotator = ">=0.1.1, <0.2"
+accelerate = ">=1.11.0, <2"

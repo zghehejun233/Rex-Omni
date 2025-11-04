@@ -26,5 +26,4 @@ setup(
     description="A high-level wrapper for Rex-Omni multimodal language model supporting various vision tasks",
     packages=find_packages(),
     python_requires=">=3.8",
-    install_requires=load_requirements(),
 )

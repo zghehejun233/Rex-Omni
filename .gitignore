@@ -169,4 +169,6 @@ website/
 Mountchicken/Rex-Omni-Eval/
 evaluation/batch_eval.py
 evaluation/sbatch_script.sh
-evaluation/sbatch_logs/
+evaluation/sbatch_logs/# pixi environments
+.pixi/*
+!.pixi/config.toml
